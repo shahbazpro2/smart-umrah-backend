@@ -34,3 +34,12 @@ export async function markRitualComplete(req: Request, res: Response) {
     res.status(400).json({ error: error.message });
   }
 }
+
+export async function resetUserProgress(req: Request, res: Response) {
+  try {
+    await UserProgress.deleteMany({ userId: req.user?.id });
+    res.json({ message: 'Umrah journey reset to step 1 successfully', success: true });
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+}
